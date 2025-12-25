@@ -51,6 +51,7 @@ public class FacultyPage extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        Logout = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -82,6 +83,12 @@ public class FacultyPage extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Faculty Portal");
 
+        Logout.setBackground(new java.awt.Color(255, 0, 0));
+        Logout.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Logout.setForeground(new java.awt.Color(255, 255, 255));
+        Logout.setText("Log Out");
+        Logout.addActionListener(this::LogoutActionPerformed);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -89,8 +96,10 @@ public class FacultyPage extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(250, 250, 250)
+                .addComponent(Logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -99,7 +108,8 @@ public class FacultyPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Logout))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -171,7 +181,7 @@ public class FacultyPage extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(Faculty_Student_Location, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(SearchButton)))
                 .addGap(19, 19, 19))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -235,11 +245,8 @@ public class FacultyPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,9 +254,11 @@ public class FacultyPage extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        getAccessibleContext().setAccessibleName("FacultyFrame");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -287,14 +296,14 @@ public class FacultyPage extends javax.swing.JFrame {
             }
             else{
                   if(!Student_Location.isEmpty()){
-                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+                      
                     PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Location LIKE ? AND Student_Name LIKE ?");
                     pmt.setString(1,  "%" + Student_Location + "%");
                     pmt.setString(2, "%" + Student_Name + "%");
                     res=pmt.executeQuery();
                 }
                   else{
-                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+                     
                     PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Name LIKE ?");
                     pmt.setString(1, "%" + Student_Name + "%");
                     res=pmt.executeQuery();
@@ -305,14 +314,14 @@ public class FacultyPage extends javax.swing.JFrame {
              int id = Integer.parseInt(Student_Id);
              if (Student_Name.isEmpty()){
                 if(!Student_Location.isEmpty()){
-                    System.out.println(Student_Id+ Student_Name+ Student_Location);
+                
                     PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Location LIKE ? AND Student_Id = ?");
                     pmt.setString(1,  "%" + Student_Location + "%");
                     pmt.setInt(2, id);
                     res=pmt.executeQuery();
                 }
                 else{
-                    System.out.println(Student_Id+ Student_Name+ Student_Location);
+                  
                     PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Id = ?");
                     pmt.setInt(1, id);
                     res=pmt.executeQuery();
@@ -320,7 +329,7 @@ public class FacultyPage extends javax.swing.JFrame {
             }
             else{
                   if(!Student_Location.isEmpty()){
-                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+                   
                     PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Location LIKE ? AND Student_Name LIKE ? AND Student_Id = ?");
                     pmt.setString(1,  "%" + Student_Location + "%");
                     pmt.setString(2, "%" + Student_Name + "%");
@@ -328,7 +337,7 @@ public class FacultyPage extends javax.swing.JFrame {
                     res=pmt.executeQuery();
                 }
                   else{
-                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+          
                     PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Name LIKE ? AND Student_Id = ?");
                     pmt.setString(1, "%" + Student_Name + "%");
                     pmt.setInt(2, id);
@@ -354,6 +363,13 @@ public class FacultyPage extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_SearchButtonActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+        MainProject mj = new MainProject();
+        mj.show();
+        dispose();
+    }//GEN-LAST:event_LogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,6 +400,7 @@ public class FacultyPage extends javax.swing.JFrame {
     private javax.swing.JTextField Faculty_Student_Id;
     private javax.swing.JTextField Faculty_Student_Location;
     private javax.swing.JTextField Faculty_Student_Name;
+    private javax.swing.JButton Logout;
     private javax.swing.JButton SearchButton;
     private javax.swing.JList<String> Student_List;
     private javax.swing.ButtonGroup buttonGroup1;

@@ -1,30 +1,291 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/SQLTemplate.sql to edit this template
- */
-/**
- * Author:  chand
- * Created: Dec 25, 2025
- */
-
+SET SQL_SAFE_UPDATES = 0;
+CREATE DATABASE if not exists VIT_Vellore;
+USE VIT_Vellore;
 
 CREATE TABLE Admin_Table (
     EmpId int,
-    EmpName varchar(50),
-    UserID varchar(50),
-    Password varchar(50)
+    EmpName varchar(255),
+    UserID varchar(100),
+    Password varchar(100)
 );
-INSERT INTO Admin_Table VALUES(12000, "admin", "admin", "admin");
-INSERT INTO Admin_Table VALUES(12001, "Chandra Pravesh", "ChandraPravesh", "Pravesh@12086");
-INSERT INTO Admin_Table VALUES(12002, "Rishu Kuamr", "RishuKumar", "Rishu@2100");
-
+INSERT INTO Admin_Table VALUES(12000, 'admin', 'admin', 'admin');
+INSERT INTO Admin_Table VALUES(12009, 'Ganesh Gaitonde', 'GaneshG', 'Ganesh@2025');
+INSERT INTO Admin_Table VALUES(12010, 'Hari Krishna', 'HariK', 'Hari@2025');
+INSERT INTO Admin_Table VALUES(12011, 'Indu Malhotra', 'InduM', 'Indu@2025');
+INSERT INTO Admin_Table VALUES(12012, 'Jatin Sarna', 'JatinS', 'Jatin@2025');
+INSERT INTO Admin_Table VALUES(12013, 'Kiran Kumar', 'KiranK', 'Kiran@2025');
+INSERT INTO Admin_Table VALUES(12014, 'Lokesh Kanagaraj', 'LokeshK', 'Lokesh@2025');
+INSERT INTO Admin_Table VALUES(12015, 'Manoj Bajpayee', 'ManojB', 'Manoj@2025');
+INSERT INTO Admin_Table VALUES(12016, 'Nandini Gupta', 'NandiniG', 'Nandini@2025');
+INSERT INTO Admin_Table VALUES(12017, 'Omkar Das', 'OmkarD', 'Omkar@2025');
+INSERT INTO Admin_Table VALUES(12018, 'Priyanka Chopra', 'PriyankaC', 'Priyanka@2025');
+INSERT INTO Admin_Table VALUES(12019, 'Quasif Ali', 'QuasifA', 'Quasif@2025');
 
 CREATE TABLE Faculty_Table(
-    EmpId int,
-    EmpName varchat(50),
+    EmpId int ,
+    EmpName varchar(50),
     UserId varchar(50),
     Password varchar(50)
 );
-INSERT INTO Admin_Table VALUES(21000, "faculty", "faculty", "Rishu@faculty");
+INSERT INTO Faculty_Table VALUES(21000, 'faculty', 'faculty', 'faculty');
+INSERT INTO Faculty_Table VALUES(21000, "Faculty", "Faculty", "Faculty");
+INSERT INTO Faculty_Table VALUES(21001, 'Arun Kumar', 'Arun', 'Arun@2025');
+INSERT INTO Faculty_Table VALUES(21002, 'Priya Sharma', 'Priya', 'Priya@2025');
+INSERT INTO Faculty_Table VALUES(21003, 'Amit Singh', 'Amit', 'Amit@2025');
+INSERT INTO Faculty_Table VALUES(21004, 'Sneha Reddy', 'Sneha', 'Sneha@2025');
+INSERT INTO Faculty_Table VALUES(21005, 'Rohan Das', 'Rohan', 'Rohan@2025');
+INSERT INTO Faculty_Table VALUES(21006, 'Anjali Gupta', 'Anjali', 'Anjali@2025');
+INSERT INTO Faculty_Table VALUES(21007, 'Vikram Malhotra', 'Vikram', 'Vikram@2025');
+INSERT INTO Faculty_Table VALUES(21008, 'Meera Iyer', 'Meera', 'Meera@2025');
+INSERT INTO Faculty_Table VALUES(21009, 'Sandeep Verma', 'Sandeep', 'Sandeep@2025');
+INSERT INTO Faculty_Table VALUES(21010, 'Pooja Nair', 'Pooja', 'Pooja@2025');
+INSERT INTO Faculty_Table VALUES(21011, 'Karan Joshi', 'Karan', 'Karan@2025');
+INSERT INTO Faculty_Table VALUES(21012, 'Tanvi Rao', 'Tanvi', 'Tanvi@2025');
+INSERT INTO Faculty_Table VALUES(21013, 'Aditya Saxena', 'Aditya', 'Aditya@2025');
+INSERT INTO Faculty_Table VALUES(21014, 'Ishita Paul', 'Ishita', 'Ishita@2025');
+INSERT INTO Faculty_Table VALUES(21015, 'Suresh Babu', 'Suresh', 'Suresh@2025');
+INSERT INTO Faculty_Table VALUES(21016, 'Kavita Deshmukh', 'Kavita', 'Kavita@2025');
+INSERT INTO Faculty_Table VALUES(21017, 'Manish Pandey', 'Manish', 'Manish@2025');
+INSERT INTO Faculty_Table VALUES(21018, 'Ritu Mishra', 'Ritu', 'Ritu@2025');
+INSERT INTO Faculty_Table VALUES(21019, 'Abhishek Chatterjee', 'Abhishek', 'Abhishek@2025');
+INSERT INTO Faculty_Table VALUES(21020, 'Divya Kapoor', 'Divya', 'Divya@2025');
+INSERT INTO Faculty_Table VALUES(21021, 'Rahul Bose', 'Rahul', 'Rahul@2025');
+INSERT INTO Faculty_Table VALUES(21022, 'Shweta Tiwari', 'Shweta', 'Shweta@2025');
+INSERT INTO Faculty_Table VALUES(21023, 'Deepak Choudhury', 'Deepak', 'Deepak@2025');
+INSERT INTO Faculty_Table VALUES(21024, 'Nidhi Agarwal', 'Nidhi', 'Nidhi@2025');
+INSERT INTO Faculty_Table VALUES(21025, 'Varun Gill', 'Varun', 'Varun@2025');
+INSERT INTO Faculty_Table VALUES(21026, 'Preeti Zaveri', 'Preeti', 'Preeti@2025');
+INSERT INTO Faculty_Table VALUES(21027, 'Kartik Aryan', 'Kartik', 'Kartik@2025');
+INSERT INTO Faculty_Table VALUES(21028, 'Sonal Chauhan', 'Sonal', 'Sonal@2025');
+INSERT INTO Faculty_Table VALUES(21029, 'Prateek Jain', 'Prateek', 'Prateek@2025');
+INSERT INTO Faculty_Table VALUES(21030, 'Simran Kaur', 'Simran', 'Simran@2025');
+INSERT INTO Faculty_Table VALUES(21031, 'Yash Vardhan', 'Yash', 'Yash@2025');
+INSERT INTO Faculty_Table VALUES(21032, 'Bhavna Sethi', 'Bhavna', 'Bhavna@2025');
+INSERT INTO Faculty_Table VALUES(21033, 'Harish Rawat', 'Harish', 'Harish@2025');
+INSERT INTO Faculty_Table VALUES(21034, 'Nehal Shah', 'Nehal', 'Nehal@2025');
+INSERT INTO Faculty_Table VALUES(21035, 'Rajesh Khanna', 'Rajesh', 'Rajesh@2025');
+INSERT INTO Faculty_Table VALUES(21036, 'Urmila Matondkar', 'Urmila', 'Urmila@2025');
+INSERT INTO Faculty_Table VALUES(21037, 'Vijay Prashad', 'Vijay', 'Vijay@2025');
+INSERT INTO Faculty_Table VALUES(21038, 'Zoya Akhtar', 'Zoya', 'Zoya@2025');
+INSERT INTO Faculty_Table VALUES(21039, 'Om Puri', 'OmPuri', 'Om@2025');
+INSERT INTO Faculty_Table VALUES(21040, 'Lata Mangesh', 'Lata', 'Lata@2025');
+INSERT INTO Faculty_Table VALUES(21041, 'Sunil Gavaskar', 'Sunil', 'Sunil@2025');
+INSERT INTO Faculty_Table VALUES(21042, 'Mithali Raj', 'Mithali', 'Mithali@2025');
+INSERT INTO Faculty_Table VALUES(21043, 'Sachin Tendulkar', 'Sachin', 'Sachin@2025');
+INSERT INTO Faculty_Table VALUES(21044, 'Saina Nehwal', 'Saina', 'Saina@2025');
+INSERT INTO Faculty_Table VALUES(21045, 'Leander Paes', 'Leander', 'Leander@2025');
+INSERT INTO Faculty_Table VALUES(21046, 'Mary Kom', 'Mary', 'Mary@2025');
+INSERT INTO Faculty_Table VALUES(21047, 'Neeraj Chopra', 'Neeraj', 'Neeraj@2025');
+INSERT INTO Faculty_Table VALUES(21048, 'PV Sindhu', 'Sindhu', 'Sindhu@2025');
+INSERT INTO Faculty_Table VALUES(21049, 'Viswanathan Anand', 'Vishy', 'Vishy@2025');
+INSERT INTO Faculty_Table VALUES(21050, 'Abhinav Bindra', 'Abhinav', 'Abhinav@2025');
+
+
+CREATE TABLE Student_Data(
+Student_Name varchar(255),
+Student_Id int,
+Student_Location VARCHAR(255)
+);
+
+INSERT INTO Student_Data VALUES('Aarav Sharma', 0004, 'Flat 101, Sunshine Apartments, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Aditi Verma', 0005, 'H.No 45, Civil Lines, Jaipur, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Akash Reddy', 0006, 'Plot 12, Jubilee Hills, Hyderabad, Telangana, India');
+INSERT INTO Student_Data VALUES('Ananya Iyer', 0007, 'Door 89, Mylapore, Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Arjun Mehra', 0008, 'Sector 15, Vashi, Navi Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Bhavya Singh', 0009, 'Lane 4, Model Town, Ludhiana, Punjab, India');
+INSERT INTO Student_Data VALUES('Chirag Gupta', 0010, 'Gali No 2, Chandni Chowk, Delhi, India');
+INSERT INTO Student_Data VALUES('Divya Nair', 0011, 'Villa 7, Kaloor, Kochi, Kerala, India');
+INSERT INTO Student_Data VALUES('Eshan Das', 0012, 'Street 9, Salt Lake City, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Falguni Shah', 0013, '3rd Floor, Navrangpura, Ahmedabad, Gujarat, India');
+INSERT INTO Student_Data VALUES('Gautam Joshi', 0014, 'Narayana Peth, Pune, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Hina Khan', 0015, 'B-Block, Gomti Nagar, Lucknow, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Ishaan Malhotra', 0016, 'DLF Phase 3, Gurgaon, Haryana, India');
+INSERT INTO Student_Data VALUES('Janhvi Kapoor', 0017, 'Pali Hill, Bandra West, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Karan Saxena', 0018, 'Arera Colony, Bhopal, Madhya Pradesh, India');
+INSERT INTO Student_Data VALUES('Lata Pillai', 0019, 'Koramangala 4th Block, Bengaluru, Karnataka, India');
+INSERT INTO Student_Data VALUES('Manish Pandey', 0020, 'Swaroop Nagar, Kanpur, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Navya Rao', 0021, 'MVP Colony, Visakhapatnam, Andhra Pradesh, India');
+INSERT INTO Student_Data VALUES('Omkar Deshmukh', 0022, 'Shivaji Nagar, Nagpur, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Prerna Ghosh', 0023, 'Bidhannagar, Durgapur, West Bengal, India');
+INSERT INTO Student_Data VALUES('Rahul Bhatia', 0024, 'Sector 22, Chandigarh, Punjab, India');
+INSERT INTO Student_Data VALUES('Sanya Mirza', 0025, 'Banjara Hills, Hyderabad, Telangana, India');
+INSERT INTO Student_Data VALUES('Tanmay Patil', 0026, 'Kothrud, Pune, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Utkarsh Mishra', 0027, 'Civil Lines, Prayagraj, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Vidya Balan', 0028, 'Chembur East, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Yashwardhan Singh', 0029, 'Vaishali Nagar, Ajmer, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Zoya Farooqui', 0030, 'Zakaria Street, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Abhinav Kumar', 0031, 'Patliputra Colony, Patna, Bihar, India');
+INSERT INTO Student_Data VALUES('Bina Rai', 0032, 'Panampilly Nagar, Kochi, Kerala, India');
+INSERT INTO Student_Data VALUES('Chetan Bhagat', 0033, 'Colaba Causeway, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Deepak Hooda', 0034, 'Rohtak Road, Sonipat, Haryana, India');
+INSERT INTO Student_Data VALUES('Ekta Bisht', 0035, 'Mall Road, Almora, Uttarakhand, India');
+INSERT INTO Student_Data VALUES('Farhan Akhtar', 0036, 'Carter Road, Bandra, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Gitanjali Rao', 0037, 'Indiranagar, Bengaluru, Karnataka, India');
+INSERT INTO Student_Data VALUES('Hardik Pandya', 0038, 'Akota, Vadodara, Gujarat, India');
+INSERT INTO Student_Data VALUES('Indrani Roy', 0039, 'Lake Gardens, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Jatin Sapru', 0040, 'Rajouri Garden, Delhi, India');
+INSERT INTO Student_Data VALUES('Kavita Krishnamurti', 0041, 'Basavanagudi, Bengaluru, Karnataka, India');
+INSERT INTO Student_Data VALUES('Lokesh Rahul', 0042, 'Kankanady, Mangalore, Karnataka, India');
+INSERT INTO Student_Data VALUES('Manoj Bajpayee', 0043, 'Belwa, West Champaran, Bihar, India');
+INSERT INTO Student_Data VALUES('Nandini Gupta', 0044, 'Malviya Nagar, Jaipur, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Ojaswini Singh', 0045, 'Ratanada, Jodhpur, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Pankaj Tripathi', 0046, 'Belsand, Gopalganj, Bihar, India');
+INSERT INTO Student_Data VALUES('Quasif Ali', 0047, 'Muradabad, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Rishabh Pant', 0048, 'Civil Lines, Roorkee, Uttarakhand, India');
+INSERT INTO Student_Data VALUES('Sneha Ullal', 0049, 'Sion, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Tarun Tahiliani', 0050, 'Chanakyapuri, New Delhi, India');
+INSERT INTO Student_Data VALUES('Upasana Kamineni', 0051, 'Somajiguda, Hyderabad, Telangana, India');
+INSERT INTO Student_Data VALUES('Vikrant Massey', 0052, 'Versova, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Waseem Jaffer', 0053, 'Mazgaon, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Xavier John', 0054, 'Anjuna, Goa, India');
+INSERT INTO Student_Data VALUES('Yami Gautam', 0055, 'Bilaspur, Himachal Pradesh, India');
+INSERT INTO Student_Data VALUES('Zeenat Aman', 0056, 'Juhu, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Amartya Sen', 0057, 'Santiniketan, West Bengal, India');
+INSERT INTO Student_Data VALUES('Bimal Jalan', 0058, 'Prithviraj Road, New Delhi, India');
+INSERT INTO Student_Data VALUES('Chitra Banerjee', 0059, 'Ballygunge, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Dilip Shanghvi', 0060, 'Walkeshwar, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('E Sreedharan', 0061, 'Ponnani, Malappuram, Kerala, India');
+INSERT INTO Student_Data VALUES('Feroz Shah', 0062, 'Civil Lines, Bareilly, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Gul Panag', 0063, 'Chandigarh, India');
+INSERT INTO Student_Data VALUES('Homi Bhabha', 0064, 'Malabar Hill, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Iravati Karve', 0065, 'Fergusson College Road, Pune, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Jagdish Chandra', 0066, 'Mymensingh Road, West Bengal, India');
+INSERT INTO Student_Data VALUES('Kiran Mazumdar', 0067, 'Whitefield, Bengaluru, Karnataka, India');
+INSERT INTO Student_Data VALUES('Leila Seth', 0068, 'Noida Sector 15, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Meghnad Saha', 0069, 'Alipore, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Narayana Murthy', 0070, 'Jayanagar, Bengaluru, Karnataka, India');
+INSERT INTO Student_Data VALUES('Om Puri', 0071, 'Ambala, Haryana, India');
+INSERT INTO Student_Data VALUES('Prannoy Roy', 0072, 'Greater Kailash, New Delhi, India');
+INSERT INTO Student_Data VALUES('Qurratulain Hyder', 0073, 'Aligarh, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Raghuram Rajan', 0074, 'Bhopal, Madhya Pradesh, India');
+INSERT INTO Student_Data VALUES('Satyajit Ray', 0075, 'Bishop Lefroy Road, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Tessy Thomas', 0076, 'Thiruvananthapuram, Kerala, India');
+INSERT INTO Student_Data VALUES('Uday Shankar', 0077, 'Almora, Uttarakhand, India');
+INSERT INTO Student_Data VALUES('Vikram Seth', 0078, 'Dehradun, Uttarakhand, India');
+INSERT INTO Student_Data VALUES('Wajid Khan', 0079, 'Saharanpur, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Xenia Mirza', 0080, 'Panjim, Goa, India');
+INSERT INTO Student_Data VALUES('Yash Chopra', 0081, 'Lahore Road, Jalandhar, Punjab, India');
+INSERT INTO Student_Data VALUES('Zakir Hussain', 0082, 'Mahim, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Amitabh Bachchan', 0083, 'Prateeksha, Juhu, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Bindu Pannicker', 0084, 'Kozhikode, Kerala, India');
+INSERT INTO Student_Data VALUES('Cyrus Mistry', 0085, 'Altamount Road, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Devi Prasad', 0086, 'Nungambakkam, Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Eshwarappa K', 0087, 'Shivamogga, Karnataka, India');
+INSERT INTO Student_Data VALUES('Falguni Pathak', 0088, 'Borivali, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Girish Karnad', 0089, 'Dharwad, Karnataka, India');
+INSERT INTO Student_Data VALUES('Hemant Soren', 0090, 'Ranchi, Jharkhand, India');
+INSERT INTO Student_Data VALUES('Indu Jain', 0091, 'Aurangzeb Road, New Delhi, India');
+INSERT INTO Student_Data VALUES('Jyoti Basu', 0092, 'Salt Lake, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Kushwant Singh', 0093, 'Sujan Singh Park, New Delhi, India');
+INSERT INTO Student_Data VALUES('Laxmi Mittal', 0094, 'Sadulpur, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Mukesh Ambani', 0095, 'Antilia, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Naveen Patnaik', 0096, 'Bhubaneswar, Odisha, India');
+INSERT INTO Student_Data VALUES('O.P. Jindal', 0097, 'Hisar, Haryana, India');
+INSERT INTO Student_Data VALUES('Pinarayi Vijayan', 0098, 'Kannur, Kerala, India');
+INSERT INTO Student_Data VALUES('Qamar Waheed', 0099, 'Hyderabad, India');
+INSERT INTO Student_Data VALUES('Ratan Tata', 0100, 'Colaba, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Sunil Mittal', 0101, 'Amrita Shergill Marg, New Delhi, India');
+INSERT INTO Student_Data VALUES('Tulsi Tanti', 0102, 'Rajkot, Gujarat, India');
+INSERT INTO Student_Data VALUES('Uday Kotak', 0103, 'Nariman Point, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Venu Srinivasan', 0104, 'Adyar, Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Waman Bhonsle', 0105, 'Ponda, Goa, India');
+INSERT INTO Student_Data VALUES('Xenia Fernandes', 0106, 'Margao, Goa, India');
+INSERT INTO Student_Data VALUES('Yogi Adityanath', 0107, 'Gorakhnath Mutt, Gorakhpur, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Zuber Khan', 0108, 'Srinagar, Jammu and Kashmir, India');
+INSERT INTO Student_Data VALUES('Aditya Birla', 0109, 'Worli Sea Face, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Baba Ramdev', 0110, 'Patanjali Yogpeeth, Haridwar, Uttarakhand, India');
+INSERT INTO Student_Data VALUES('Chanda Kochhar', 0111, 'Jodhpur, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Dhirubhai Ambani', 0112, 'Chorwad, Gujarat, India');
+INSERT INTO Student_Data VALUES('Ebrahim Alkazi', 0113, 'Pune, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Fali Nariman', 0114, 'Nizamuddin East, New Delhi, India');
+INSERT INTO Student_Data VALUES('Goolam Vahanvati', 0115, 'Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('H.D. Deve Gowda', 0116, 'Hassan, Karnataka, India');
+INSERT INTO Student_Data VALUES('I.K. Gujral', 0117, 'Jalandhar, Punjab, India');
+INSERT INTO Student_Data VALUES('J.R.D. Tata', 0118, 'Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('K.R. Narayanan', 0119, 'Kottayam, Kerala, India');
+INSERT INTO Student_Data VALUES('L.K. Advani', 0120, 'Khan Market, New Delhi, India');
+INSERT INTO Student_Data VALUES('M.S. Dhoni', 0121, 'Harmu Housing Colony, Ranchi, Jharkhand, India');
+INSERT INTO Student_Data VALUES('Nitin Gadkari', 0122, 'Nagpur, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Oommen Chandy', 0123, 'Puthuppally, Kerala, India');
+INSERT INTO Student_Data VALUES('Pranab Mukherjee', 0124, 'Mirati, West Bengal, India');
+INSERT INTO Student_Data VALUES('Qazi Syed', 0125, 'Nagpur, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Rahul Gandhi', 0126, 'Tughlak Lane, New Delhi, India');
+INSERT INTO Student_Data VALUES('Sonia Gandhi', 0127, '10 Janpath, New Delhi, India');
+INSERT INTO Student_Data VALUES('Tharoor Shashi', 0128, 'Palakkad, Kerala, India');
+INSERT INTO Student_Data VALUES('Uddhav Thackeray', 0129, 'Matoshree, Bandra, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Varun Gandhi', 0130, 'Pilibhit, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Wajeda Tabassum', 0131, 'Hyderabad, India');
+INSERT INTO Student_Data VALUES('Xavier Britto', 0132, 'Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Yashwant Sinha', 0133, 'Hazaribagh, Jharkhand, India');
+INSERT INTO Student_Data VALUES('Zubeen Garg', 0134, 'Guwahati, Assam, India');
+INSERT INTO Student_Data VALUES('Anil Ambani', 0135, 'Cuffe Parade, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Buddhadeb Bhattacharjee', 0136, 'Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('C.N.R. Rao', 0137, 'IISc Campus, Bengaluru, Karnataka, India');
+INSERT INTO Student_Data VALUES('Digvijaya Singh', 0138, 'Raghogarh, Madhya Pradesh, India');
+INSERT INTO Student_Data VALUES('E.S.L. Narasimhan', 0139, 'Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Farooq Abdullah', 0140, 'Gupkar Road, Srinagar, J&K, India');
+INSERT INTO Student_Data VALUES('G. Madhavan Nair', 0141, 'Thiruvananthapuram, Kerala, India');
+INSERT INTO Student_Data VALUES('Harshad Mehta', 0142, 'Worli, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Inderjit Kaur', 0143, 'Amritsar, Punjab, India');
+INSERT INTO Student_Data VALUES('J. Jayalalithaa', 0144, 'Poes Garden, Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('K. Chandrashekar Rao', 0145, 'Gajwel, Telangana, India');
+INSERT INTO Student_Data VALUES('Lalu Prasad Yadav', 0146, 'Danapur, Patna, Bihar, India');
+INSERT INTO Student_Data VALUES('M. Karunanidhi', 0147, 'Gopalapuram, Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('N. Chandrababu Naidu', 0148, 'Naravaripalli, Andhra Pradesh, India');
+INSERT INTO Student_Data VALUES('O. Panneerselvam', 0149, 'Periyakulam, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('P. Chidambaram', 0150, 'Sivaganga, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Quratulain Fatima', 0151, 'Srinagar, India');
+INSERT INTO Student_Data VALUES('Rajnath Singh', 0152, 'Chandauli, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Sharad Pawar', 0153, 'Baramati, Maharashtra, India');
+INSERT INTO Student_Data VALUES('T.R. Zeliang', 0154, 'Peren, Nagaland, India');
+INSERT INTO Student_Data VALUES('Uma Bharti', 0155, 'Tikamgarh, Madhya Pradesh, India');
+INSERT INTO Student_Data VALUES('Vijay Rupani', 0156, 'Rajkot, Gujarat, India');
+INSERT INTO Student_Data VALUES('Wamanrao Chatap', 0157, 'Chandrapur, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Xenia Saini', 0158, 'Ludhiana, Punjab, India');
+INSERT INTO Student_Data VALUES('Y.S. Jagan Mohan Reddy', 0159, 'Pulivendula, Andhra Pradesh, India');
+INSERT INTO Student_Data VALUES('Zoramthanga', 0160, 'Aizawl, Mizoram, India');
+INSERT INTO Student_Data VALUES('Amit Shah', 0161, 'Mansarovar, Ahmedabad, Gujarat, India');
+INSERT INTO Student_Data VALUES('B.S. Yediyurappa', 0162, 'Bookanakere, Karnataka, India');
+INSERT INTO Student_Data VALUES('Conrad Sangma', 0163, 'Tura, Meghalaya, India');
+INSERT INTO Student_Data VALUES('Devendra Fadnavis', 0164, 'Nagpur, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Eknath Shinde', 0165, 'Thane, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Feroze Gandhi', 0166, 'Rae Bareli, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Gajendra Singh Shekhawat', 0167, 'Jodhpur, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Hardeep Singh Puri', 0168, 'New Delhi, India');
+INSERT INTO Student_Data VALUES('Isha Foundation', 0169, 'Velliangiri Mountains, Coimbatore, India');
+INSERT INTO Student_Data VALUES('J.P. Nadda', 0170, 'Bilaspur, Himachal Pradesh, India');
+INSERT INTO Student_Data VALUES('Kiren Rijiju', 0171, 'West Kameng, Arunachal Pradesh, India');
+INSERT INTO Student_Data VALUES('Lokesh Kanagaraj', 0172, 'Coimbatore, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Mamata Banerjee', 0173, 'Kalighat, Kolkata, West Bengal, India');
+INSERT INTO Student_Data VALUES('Nirmala Sitharaman', 0174, 'Madurai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Om Birla', 0175, 'Kota, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Piyush Goyal', 0176, 'Malabar Hill, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Qamaruzzaman Azmi', 0177, 'Azamgarh, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Ram Nath Kovind', 0178, 'Derapur, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('S. Jaishankar', 0179, 'Chanakyapuri, New Delhi, India');
+INSERT INTO Student_Data VALUES('T.S. Singh Deo', 0180, 'Ambikapur, Chhattisgarh, India');
+INSERT INTO Student_Data VALUES('Upen Patel', 0181, 'Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Vicky Kaushal', 0182, 'Andheri West, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Wajid Ali Shah', 0183, 'Lucknow, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Xolo Maridueña', 0184, 'Kochi, Kerala, India');
+INSERT INTO Student_Data VALUES('Yuvraj Singh', 0185, 'Sector 11, Chandigarh, India');
+INSERT INTO Student_Data VALUES('Zayed Khan', 0186, 'Bandra, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Abhishek Bachchan', 0187, 'Jalsa, Juhu, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Bhumi Pednekar', 0188, 'Peddar Road, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Chetan Sharma', 0189, 'Kurukshetra, Haryana, India');
+INSERT INTO Student_Data VALUES('Dinesh Karthik', 0190, 'Besant Nagar, Chennai, Tamil Nadu, India');
+INSERT INTO Student_Data VALUES('Esha Gupta', 0191, 'New Delhi, India');
+INSERT INTO Student_Data VALUES('Fatima Sana Shaikh', 0192, 'Srinagar, Jammu and Kashmir, India');
+INSERT INTO Student_Data VALUES('Gautam Gambhir', 0193, 'Old Rajinder Nagar, New Delhi, India');
+INSERT INTO Student_Data VALUES('Huma Qureshi', 0194, 'Okhla, New Delhi, India');
+INSERT INTO Student_Data VALUES('Irrfan Khan', 0195, 'Tonk, Rajasthan, India');
+INSERT INTO Student_Data VALUES('Javed Akhtar', 0196, 'Gwalior, Madhya Pradesh, India');
+INSERT INTO Student_Data VALUES('Kangana Ranaut', 0197, 'Bhambla, Himachal Pradesh, India');
+INSERT INTO Student_Data VALUES('Lata Mangeshkar', 0198, 'Pedder Road, Mumbai, Maharashtra, India');
+INSERT INTO Student_Data VALUES('Mohammad Shami', 0199, 'Amroha, Uttar Pradesh, India');
+INSERT INTO Student_Data VALUES('Neeraj Chopra', 0200, 'Khandra, Panipat, Haryana, India');
+INSERT INTO Student_Data VALUES('Ouseppachan', 0201, 'Thrissur, Kerala, India');
+INSERT INTO Student_Data VALUES('P.V. Sindhu', 0202, 'Pullela Gopichand Academy, Hyderabad, India');
+INSERT INTO Student_Data VALUES('Quasif Khan', 0203, 'Indore, Madhya Pradesh, India');
 
 
