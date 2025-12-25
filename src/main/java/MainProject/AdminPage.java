@@ -1171,23 +1171,17 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JTextField Admin_Student_Id1;
     private javax.swing.JTextField Admin_Student_Id10;
     private javax.swing.JTextField Admin_Student_Id2;
-    private javax.swing.JTextField Admin_Student_Id3;
     private javax.swing.JTextField Admin_Student_Id4;
-    private javax.swing.JTextField Admin_Student_Id7;
     private javax.swing.JTextField Admin_Student_Location;
     private javax.swing.JTextField Admin_Student_Location1;
     private javax.swing.JTextField Admin_Student_Location11;
     private javax.swing.JTextField Admin_Student_Location2;
-    private javax.swing.JTextField Admin_Student_Location3;
     private javax.swing.JTextField Admin_Student_Location4;
-    private javax.swing.JTextField Admin_Student_Location7;
     private javax.swing.JTextField Admin_Student_Name;
     private javax.swing.JTextField Admin_Student_Name1;
     private javax.swing.JTextField Admin_Student_Name10;
     private javax.swing.JTextField Admin_Student_Name2;
-    private javax.swing.JTextField Admin_Student_Name3;
     private javax.swing.JTextField Admin_Student_Name4;
-    private javax.swing.JTextField Admin_Student_Name7;
     private javax.swing.JTextField Admin_Update_Id;
     private javax.swing.JTextField Admin_Update_Location;
     private javax.swing.JTextField Admin_Update_Name;
@@ -1196,8 +1190,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JLabel UpdateStatus;
     private javax.swing.JButton Update_Button;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
@@ -1205,7 +1197,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1221,10 +1212,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1235,14 +1222,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
@@ -1261,7 +1240,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
@@ -1270,7 +1248,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables

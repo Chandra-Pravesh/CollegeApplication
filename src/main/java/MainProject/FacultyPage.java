@@ -7,16 +7,33 @@ package MainProject;
 /**
  *
  * @author chand
+ * 
  */
+import java.sql.*;
+import java.sql.DriverManager;
+import  javax.swing.DefaultListModel;
 public class FacultyPage extends javax.swing.JFrame {
-    
+   private DefaultListModel<String> ListModel;
+   private Connection con; 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FacultyPage.class.getName());
 
     /**
      * Creates new form FaculityPage
      */
     public FacultyPage() {
+        
+        try{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con= DriverManager.getConnection("jdbc:mysql://localhost:3306/vit_vellore", "root", "root");
+ 
+
+        }
+        catch(ClassNotFoundException | SQLException ex){
+            System.out.println(ex);
+        }
         initComponents();
+          this.ListModel = new DefaultListModel<>();
+          Student_List.setModel(ListModel);
     }
 
     /**
@@ -49,7 +66,7 @@ public class FacultyPage extends javax.swing.JFrame {
         Faculty_Student_Location = new javax.swing.JTextField();
         SearchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        Student_List = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(500, 350));
@@ -133,7 +150,7 @@ public class FacultyPage extends javax.swing.JFrame {
 
         Faculty_Student_Location.addActionListener(this::Faculty_Student_LocationActionPerformed);
 
-        SearchButton.setText("ADD");
+        SearchButton.setText("SEARCH");
         SearchButton.addActionListener(this::SearchButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -184,7 +201,7 @@ public class FacultyPage extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jList2);
+        jScrollPane1.setViewportView(Student_List);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -251,10 +268,87 @@ public class FacultyPage extends javax.swing.JFrame {
 
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         // TODO add your handling code here:
+        ListModel.clear();
         
         String Student_Id = Faculty_Student_Id.getText();
         String Student_Name = Faculty_Student_Name.getText();
-        String Student_Location=Faculty_Student_Name.getText();
+        String Student_Location=Faculty_Student_Location.getText();
+        ResultSet res = null;
+        try{
+        if(Student_Id.isEmpty()){
+            if (Student_Name.isEmpty()){
+                if(Student_Location.isEmpty()){
+                }
+                else{
+                    PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Location LIKE ?");
+                    pmt.setString(1, "%" + Student_Location + "%");
+                    res=pmt.executeQuery();
+                }
+            }
+            else{
+                  if(!Student_Location.isEmpty()){
+                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+                    PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Location LIKE ? AND Student_Name LIKE ?");
+                    pmt.setString(1,  "%" + Student_Location + "%");
+                    pmt.setString(2, "%" + Student_Name + "%");
+                    res=pmt.executeQuery();
+                }
+                  else{
+                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+                    PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Name LIKE ?");
+                    pmt.setString(1, "%" + Student_Name + "%");
+                    res=pmt.executeQuery();
+                  }
+            }
+        }
+        else{
+             int id = Integer.parseInt(Student_Id);
+             if (Student_Name.isEmpty()){
+                if(!Student_Location.isEmpty()){
+                    System.out.println(Student_Id+ Student_Name+ Student_Location);
+                    PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Location LIKE ? AND Student_Id = ?");
+                    pmt.setString(1,  "%" + Student_Location + "%");
+                    pmt.setInt(2, id);
+                    res=pmt.executeQuery();
+                }
+                else{
+                    System.out.println(Student_Id+ Student_Name+ Student_Location);
+                    PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Id = ?");
+                    pmt.setInt(1, id);
+                    res=pmt.executeQuery();
+                }
+            }
+            else{
+                  if(!Student_Location.isEmpty()){
+                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+                    PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Location LIKE ? AND Student_Name LIKE ? AND Student_Id = ?");
+                    pmt.setString(1,  "%" + Student_Location + "%");
+                    pmt.setString(2, "%" + Student_Name + "%");
+                    pmt.setInt(3, id);
+                    res=pmt.executeQuery();
+                }
+                  else{
+                      System.out.println(Student_Id+ Student_Name+ Student_Location);
+                    PreparedStatement pmt = con.prepareCall("SELECT * FROM Student_Data WHERE Student_Name LIKE ? AND Student_Id = ?");
+                    pmt.setString(1, "%" + Student_Name + "%");
+                    pmt.setInt(2, id);
+                    res=pmt.executeQuery();
+                  }
+            }
+        }
+        
+       if (res != null) { 
+    while(res.next()){
+        // Your existing concatenation and ListModel code
+        String StudentInfo = res.getString(1) + " - " + res.getString(2) + " - " + res.getString(3);
+        ListModel.addElement(StudentInfo);
+    }
+} else {
+    // Optional: tell the user to fill at least one field
+    System.out.println("No search criteria provided.");
+}
+        }
+        catch(Exception ex){System.out.println(ex);}
         
         
         
@@ -291,6 +385,7 @@ public class FacultyPage extends javax.swing.JFrame {
     private javax.swing.JTextField Faculty_Student_Location;
     private javax.swing.JTextField Faculty_Student_Name;
     private javax.swing.JButton SearchButton;
+    private javax.swing.JList<String> Student_List;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -303,7 +398,6 @@ public class FacultyPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
