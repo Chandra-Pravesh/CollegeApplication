@@ -1100,8 +1100,6 @@ public class AdminPage extends javax.swing.JFrame {
         }
         catch(NumberFormatException | SQLException ex){
             System.out.println(ex);
-        } catch (InterruptedException ex) {
-            System.getLogger(AdminPage.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }     
         
     }//GEN-LAST:event_jButton20ActionPerformed
