@@ -4,6 +4,12 @@
  */
 package MainProject;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author chand
@@ -11,12 +17,32 @@ package MainProject;
 public class AdminPage extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminPage.class.getName());
+    private Connection con; 
 
     /**
      * Creates new form AdminPage
      */
-    public AdminPage() {
+    public AdminPage() 
+    {
+        try{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con= DriverManager.getConnection("jdbc:mysql://localhost:3306/vit_vellore", "root", "root");
+ 
+
+        }
+        catch(Exception ex){
+            System.out.println(ex);
+        }
         initComponents();
+        Add_Status.setVisible(false);
+        Admin_Delete_Show_Name.setVisible(false);
+        Admin_Delete_Show_Id.setVisible(false);
+        Admin_Delete_Show_Location.setVisible(false);
+        DeleteButton.setVisible(false);
+        Update_Button.setVisible(false);
+        Admin_Update_Name.setVisible(false);
+        Admin_Update_Location.setVisible(false);
+        UpdateStatus.setVisible(false);
     }
 
     /**
@@ -93,42 +119,34 @@ public class AdminPage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
-        Admin_Student_Name5 = new javax.swing.JTextField();
+        Admin_Add_Name = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        Admin_Student_Id5 = new javax.swing.JTextField();
+        Admin_Add_Id = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        Admin_Student_Location5 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        Admin_Add_Location = new javax.swing.JTextField();
+        AddStudent = new javax.swing.JButton();
+        Add_Status = new javax.swing.JLabel();
+        AddStatus = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
-        Admin_Student_Name11 = new javax.swing.JTextField();
+        Admin_Delete_Id = new javax.swing.JTextField();
         jLabel64 = new javax.swing.JLabel();
-        jLabel65 = new javax.swing.JLabel();
-        Admin_Student_Id11 = new javax.swing.JTextField();
-        jLabel66 = new javax.swing.JLabel();
-        Admin_Student_Location12 = new javax.swing.JTextField();
         jButton16 = new javax.swing.JButton();
-        jLabel67 = new javax.swing.JLabel();
-        jLabel68 = new javax.swing.JLabel();
-        jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
-        jButton17 = new javax.swing.JButton();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel71 = new javax.swing.JLabel();
-        Admin_Student_Name12 = new javax.swing.JTextField();
-        jLabel72 = new javax.swing.JLabel();
-        jLabel73 = new javax.swing.JLabel();
-        Admin_Student_Id12 = new javax.swing.JTextField();
-        jLabel74 = new javax.swing.JLabel();
-        Admin_Student_Location13 = new javax.swing.JTextField();
-        jButton18 = new javax.swing.JButton();
-        jLabel75 = new javax.swing.JLabel();
-        jButton19 = new javax.swing.JButton();
-        Admin_Student_Name13 = new javax.swing.JTextField();
-        Admin_Student_Id13 = new javax.swing.JTextField();
-        Admin_Student_Location14 = new javax.swing.JTextField();
-        Admin_Student_Location15 = new javax.swing.JTextField();
+        Delete_Student_Label = new javax.swing.JLabel();
+        Admin_Delete_Show_Name = new javax.swing.JLabel();
+        Admin_Delete_Show_Id = new javax.swing.JLabel();
+        Admin_Delete_Show_Location = new javax.swing.JLabel();
+        DeleteButton = new javax.swing.JButton();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel65 = new javax.swing.JLabel();
+        Admin_Update_Id = new javax.swing.JTextField();
+        jLabel66 = new javax.swing.JLabel();
+        jButton20 = new javax.swing.JButton();
+        UpdateStatus = new javax.swing.JLabel();
+        Admin_Update_Location = new javax.swing.JTextField();
+        Update_Button = new javax.swing.JButton();
+        Admin_Update_Name = new javax.swing.JTextField();
 
         jLabel4.setText("Add Student");
 
@@ -550,7 +568,7 @@ public class AdminPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -575,7 +593,7 @@ public class AdminPage extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 353, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -599,19 +617,20 @@ public class AdminPage extends javax.swing.JFrame {
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel30.setText("Add Student");
 
-        Admin_Student_Name5.addActionListener(this::Admin_Student_Name5ActionPerformed);
+        Admin_Add_Name.addActionListener(this::Admin_Add_NameActionPerformed);
 
         jLabel31.setText("Student Name");
 
         jLabel32.setText("Student Id");
 
-        Admin_Student_Id5.addActionListener(this::Admin_Student_Id5ActionPerformed);
+        Admin_Add_Id.addActionListener(this::Admin_Add_IdActionPerformed);
 
         jLabel33.setText("Student Location");
 
-        Admin_Student_Location5.addActionListener(this::Admin_Student_Location5ActionPerformed);
+        Admin_Add_Location.addActionListener(this::Admin_Add_LocationActionPerformed);
 
-        jButton7.setText("ADD");
+        AddStudent.setText("ADD");
+        AddStudent.addActionListener(this::AddStudentActionPerformed);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -621,24 +640,27 @@ public class AdminPage extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135)
+                        .addComponent(AddStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Admin_Student_Name5, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                            .addComponent(Admin_Student_Id5))
+                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Admin_Add_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(Admin_Student_Location5, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                                .addComponent(jButton7)))))
-                .addGap(19, 19, 19))
+                            .addComponent(Admin_Add_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Admin_Add_Location, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AddStudent)
+                            .addComponent(Add_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -646,228 +668,158 @@ public class AdminPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Admin_Student_Id5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel30)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel30)
+                            .addComponent(AddStatus))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Admin_Student_Name5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Admin_Add_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel33)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Admin_Student_Location5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel32)
+                            .addComponent(Add_Status))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Admin_Add_Location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddStudent)
+                            .addComponent(Admin_Add_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel63.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel63.setText("Delete Student");
 
-        Admin_Student_Name11.addActionListener(this::Admin_Student_Name11ActionPerformed);
+        Admin_Delete_Id.addActionListener(this::Admin_Delete_IdActionPerformed);
 
-        jLabel64.setText("Student Name");
-
-        jLabel65.setText("Student Id");
-
-        Admin_Student_Id11.addActionListener(this::Admin_Student_Id11ActionPerformed);
-
-        jLabel66.setText("Student Location");
-
-        Admin_Student_Location12.addActionListener(this::Admin_Student_Location12ActionPerformed);
+        jLabel64.setText("Student Id:");
 
         jButton16.setText("SEARCH");
         jButton16.addActionListener(this::jButton16ActionPerformed);
 
-        jLabel67.setText("Student Found !");
+        Admin_Delete_Show_Name.setText("Student Name");
 
-        jLabel68.setText("Student Name");
+        Admin_Delete_Show_Id.setText("Student ID");
 
-        jLabel69.setText("Student ID");
+        Admin_Delete_Show_Location.setText("Student Location");
 
-        jLabel70.setText("Student Location");
-
-        jButton17.setText("DELETE");
-        jButton17.addActionListener(this::jButton17ActionPerformed);
+        DeleteButton.setText("DELETE");
+        DeleteButton.addActionListener(this::DeleteButtonActionPerformed);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Admin_Student_Name11, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel65, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Admin_Student_Id11, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                            .addComponent(jLabel69, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(Admin_Delete_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel70, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                                    .addComponent(Admin_Student_Location12, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton17, javax.swing.GroupLayout.Alignment.TRAILING))))))
-                .addGap(19, 19, 19))
+                                .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Delete_Student_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(Admin_Delete_Show_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Admin_Delete_Show_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Admin_Delete_Show_Location, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DeleteButton)
+                    .addComponent(jButton16))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel63)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel65)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Admin_Student_Id11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel64)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Admin_Student_Name11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel66)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Admin_Student_Location12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton16))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel67)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel63)
+                            .addComponent(Delete_Student_Label))
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel64)
+                            .addComponent(Admin_Delete_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel68)
-                    .addComponent(jLabel69)
-                    .addComponent(jLabel70)
-                    .addComponent(jButton17))
-                .addGap(22, 22, 22))
+                    .addComponent(Admin_Delete_Show_Location)
+                    .addComponent(Admin_Delete_Show_Id)
+                    .addComponent(Admin_Delete_Show_Name)
+                    .addComponent(DeleteButton))
+                .addGap(90, 90, 90))
         );
 
-        jLabel71.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel71.setText("Delete Student");
+        jLabel65.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel65.setText("Update Student");
 
-        Admin_Student_Name12.addActionListener(this::Admin_Student_Name12ActionPerformed);
+        Admin_Update_Id.addActionListener(this::Admin_Update_IdActionPerformed);
 
-        jLabel72.setText("Student Name");
+        jLabel66.setText("Student Id:");
 
-        jLabel73.setText("Student Id");
+        jButton20.setText("SEARCH");
+        jButton20.addActionListener(this::jButton20ActionPerformed);
 
-        Admin_Student_Id12.addActionListener(this::Admin_Student_Id12ActionPerformed);
+        UpdateStatus.setText("Student Found !");
 
-        jLabel74.setText("Student Location");
+        Update_Button.setText("UPDATE");
+        Update_Button.addActionListener(this::Update_ButtonActionPerformed);
 
-        Admin_Student_Location13.addActionListener(this::Admin_Student_Location13ActionPerformed);
-
-        jButton18.setText("SEARCH");
-        jButton18.addActionListener(this::jButton18ActionPerformed);
-
-        jLabel75.setText("Student Found !");
-
-        jButton19.setText("UPDATE");
-        jButton19.addActionListener(this::jButton19ActionPerformed);
-
-        Admin_Student_Name13.addActionListener(this::Admin_Student_Name13ActionPerformed);
-
-        Admin_Student_Id13.addActionListener(this::Admin_Student_Id13ActionPerformed);
-
-        Admin_Student_Location14.addActionListener(this::Admin_Student_Location14ActionPerformed);
-
-        Admin_Student_Location15.addActionListener(this::Admin_Student_Location15ActionPerformed);
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel71, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addComponent(Admin_Student_Location13, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Admin_Student_Location14, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel15Layout.createSequentialGroup()
-                                        .addComponent(Admin_Student_Name13, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Admin_Student_Id13, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Admin_Student_Location15, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton18, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton19, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Admin_Student_Name12, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel72, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addComponent(jLabel65, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UpdateStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                        .addComponent(jLabel66, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Admin_Update_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(Admin_Update_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel73, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Admin_Student_Id12, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel74, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(Admin_Update_Location, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton20)
+                    .addComponent(Update_Button))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel65)
+                    .addComponent(UpdateStatus))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel66)
+                    .addComponent(Admin_Update_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Admin_Update_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Admin_Update_Location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Update_Button))
                 .addGap(19, 19, 19))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel71)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel73)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Admin_Student_Id12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Admin_Student_Location14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel72)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Admin_Student_Name12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel74)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Admin_Student_Location13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton18))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel75)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton19)
-                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Admin_Student_Id13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Admin_Student_Name13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Admin_Student_Location15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -880,7 +832,7 @@ public class AdminPage extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -891,10 +843,10 @@ public class AdminPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -903,8 +855,7 @@ public class AdminPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -919,19 +870,19 @@ public class AdminPage extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(585, Short.MAX_VALUE)
+                .addContainerGap(588, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(576, Short.MAX_VALUE)))
+                    .addContainerGap(579, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(61, 61, 61)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(123, Short.MAX_VALUE)))
         );
 
         pack();
@@ -994,17 +945,17 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Admin_Student_Location4ActionPerformed
 
-    private void Admin_Student_Name5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Name5ActionPerformed
+    private void Admin_Add_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Add_NameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Name5ActionPerformed
+    }//GEN-LAST:event_Admin_Add_NameActionPerformed
 
-    private void Admin_Student_Id5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Id5ActionPerformed
+    private void Admin_Add_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Add_IdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Id5ActionPerformed
+    }//GEN-LAST:event_Admin_Add_IdActionPerformed
 
-    private void Admin_Student_Location5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Location5ActionPerformed
+    private void Admin_Add_LocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Add_LocationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Location5ActionPerformed
+    }//GEN-LAST:event_Admin_Add_LocationActionPerformed
 
     private void Admin_Student_Name10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Name10ActionPerformed
         // TODO add your handling code here:
@@ -1026,61 +977,161 @@ public class AdminPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton15ActionPerformed
 
-    private void Admin_Student_Name11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Name11ActionPerformed
+    private void Admin_Delete_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Delete_IdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Name11ActionPerformed
-
-    private void Admin_Student_Id11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Id11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Id11ActionPerformed
-
-    private void Admin_Student_Location12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Location12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Location12ActionPerformed
+    }//GEN-LAST:event_Admin_Delete_IdActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
+        try{
+            int Student_Id  = Integer.parseInt(Admin_Delete_Id.getText());
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM Student_Data WHERE Student_Id=?");
+            pst.setInt(1, Student_Id);
+            ResultSet res = pst.executeQuery();
+            if(res.next()){
+                Delete_Student_Label.setText("StudentFound");
+                Admin_Delete_Show_Name.setText(res.getString("Student_Name")); 
+                Admin_Delete_Show_Id.setText(res.getString("Student_Id"));
+                Admin_Delete_Show_Location.setText(res.getString("Student_Location"));
+                Admin_Delete_Show_Name.setVisible(true);
+                Admin_Delete_Show_Id.setVisible(true);
+                Admin_Delete_Show_Location.setVisible(true);
+                DeleteButton.setVisible(true); 
+                
+            }
+            
+            else{
+                 Delete_Student_Label.setText("StudentNotFound");
+            }
+           
+            
+            
+        }
+        catch(NumberFormatException | SQLException ex){
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton16ActionPerformed
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton17ActionPerformed
+        int StudentId = Integer.parseInt(Admin_Delete_Show_Id.getText());
+        try {
+            PreparedStatement pmt = con.prepareStatement("DELETE FROM Student_Data WHERE Student_Id=?");
+            pmt.setInt(1, StudentId);
+            int res = pmt.executeUpdate();
+            Admin_Delete_Id.setText("");
+            if (res==1){
+                Delete_Student_Label.setVisible(true);
+                 Delete_Student_Label.setText("Student Deleted.");
+                Admin_Delete_Show_Name.setVisible(false);
+                Admin_Delete_Show_Id.setVisible(false);
+                Admin_Delete_Show_Location.setVisible(false);
+                DeleteButton.setVisible(false);
+                Delete_Student_Label.setText("Student Deleted.");
+            }
+            else{
+                Delete_Student_Label.setText("Student Not Deleted.");
+            }
+        } catch (SQLException ex) {
+            System.getLogger(AdminPage.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    private void Admin_Student_Name12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Name12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Name12ActionPerformed
+    private void AddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStudentActionPerformed
+        try {
+            String StudentName, StudentID, StudentLocation;
+            StudentName = Admin_Add_Name.getText();
+            StudentID = Admin_Add_Id.getText();
+            StudentLocation = Admin_Add_Location.getText();
+            PreparedStatement pmt = con.prepareStatement("INSERT INTO Student_Data (Student_Name, Student_Id, Student_Location) VALUES(?, ?,?)");
+            pmt.setString(1, StudentName);
+            pmt.setString(2, StudentID);
+            pmt.setString(3, StudentLocation);
+            int st = pmt.executeUpdate();
+            if(st>0){
+                Add_Status.setVisible(true);
+                Add_Status.setText("Inserted");
+                Admin_Add_Name.setText("");
+                Admin_Add_Id.setText("");
+                Admin_Add_Location.setText("");
+            }
+            else{  Add_Status.setVisible(true);
+                Add_Status.setText("Not Inserted");
+            }
+            
+        } catch (SQLException ex) {
+            System.getLogger(AdminPage.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_AddStudentActionPerformed
 
-    private void Admin_Student_Id12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Id12ActionPerformed
+    private void Admin_Update_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Update_IdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Id12ActionPerformed
+    }//GEN-LAST:event_Admin_Update_IdActionPerformed
 
-    private void Admin_Student_Location13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Location13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Location13ActionPerformed
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+       // TODO add your handling code here:
+        try{
+            int Student_Id  = Integer.parseInt(Admin_Update_Id.getText());
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM Student_Data WHERE Student_Id=?");
+            pst.setInt(1, Student_Id);
+            ResultSet res = pst.executeQuery();
+            
+            if(res.next()){
+                UpdateStatus.setText("Student Found");
+                Admin_Update_Name.setText(res.getString("Student_Name")); 
+                Admin_Update_Location.setText(res.getString("Student_Location"));
+                Admin_Update_Name.setVisible(true);
+                Admin_Update_Location.setVisible(true);
+                Update_Button.setVisible(true); 
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
+                UpdateStatus.setVisible(false);
+          
+                
+            }        
+            else{
+                UpdateStatus.setVisible(true);
+                 UpdateStatus.setText("StudentNotFound");
 
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton19ActionPerformed
+                UpdateStatus.setVisible(false);
+            } 
+        }
+        catch(NumberFormatException | SQLException ex){
+            System.out.println(ex);
+        } catch (InterruptedException ex) {
+            System.getLogger(AdminPage.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }     
+        
+    }//GEN-LAST:event_jButton20ActionPerformed
 
-    private void Admin_Student_Name13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Name13ActionPerformed
+    private void Update_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Name13ActionPerformed
-
-    private void Admin_Student_Id13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Id13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Id13ActionPerformed
-
-    private void Admin_Student_Location14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Location14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Location14ActionPerformed
-
-    private void Admin_Student_Location15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_Student_Location15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Admin_Student_Location15ActionPerformed
+     
+        try {
+            PreparedStatement pmt = con.prepareStatement("UPDATE Student_Data SET Student_Name =?, Student_Location =? WHERE Student_Id =?");
+            pmt.setString(1, Admin_Update_Name.getText());
+            pmt.setString(2, Admin_Update_Location.getText());
+            pmt.setString(3, Admin_Update_Id.getText());
+            int res = pmt.executeUpdate();
+            if (res==1){
+                Admin_Update_Name.setVisible(false);
+                Admin_Update_Location.setVisible(false);
+                Admin_Delete_Id.setVisible(false);
+                UpdateStatus.setText("Student Updates.");
+                UpdateStatus.setVisible(true);
+                Update_Button.setVisible(false);
+            }
+            else{
+                UpdateStatus.setVisible(true);
+                UpdateStatus.setText("Student Not Updated");
+            }
+        }
+            catch(SQLException ex){System.out.println(ex);}
+        
+        
+    }//GEN-LAST:event_Update_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1108,55 +1159,56 @@ public class AdminPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AddStatus;
+    private javax.swing.JButton AddStudent;
+    private javax.swing.JLabel Add_Status;
+    private javax.swing.JTextField Admin_Add_Id;
+    private javax.swing.JTextField Admin_Add_Location;
+    private javax.swing.JTextField Admin_Add_Name;
+    private javax.swing.JTextField Admin_Delete_Id;
+    private javax.swing.JLabel Admin_Delete_Show_Id;
+    private javax.swing.JLabel Admin_Delete_Show_Location;
+    private javax.swing.JLabel Admin_Delete_Show_Name;
     private javax.swing.JTextField Admin_Student_Id;
     private javax.swing.JTextField Admin_Student_Id1;
     private javax.swing.JTextField Admin_Student_Id10;
-    private javax.swing.JTextField Admin_Student_Id11;
-    private javax.swing.JTextField Admin_Student_Id12;
-    private javax.swing.JTextField Admin_Student_Id13;
     private javax.swing.JTextField Admin_Student_Id2;
     private javax.swing.JTextField Admin_Student_Id3;
     private javax.swing.JTextField Admin_Student_Id4;
-    private javax.swing.JTextField Admin_Student_Id5;
     private javax.swing.JTextField Admin_Student_Id7;
     private javax.swing.JTextField Admin_Student_Location;
     private javax.swing.JTextField Admin_Student_Location1;
     private javax.swing.JTextField Admin_Student_Location11;
-    private javax.swing.JTextField Admin_Student_Location12;
-    private javax.swing.JTextField Admin_Student_Location13;
-    private javax.swing.JTextField Admin_Student_Location14;
-    private javax.swing.JTextField Admin_Student_Location15;
     private javax.swing.JTextField Admin_Student_Location2;
     private javax.swing.JTextField Admin_Student_Location3;
     private javax.swing.JTextField Admin_Student_Location4;
-    private javax.swing.JTextField Admin_Student_Location5;
     private javax.swing.JTextField Admin_Student_Location7;
     private javax.swing.JTextField Admin_Student_Name;
     private javax.swing.JTextField Admin_Student_Name1;
     private javax.swing.JTextField Admin_Student_Name10;
-    private javax.swing.JTextField Admin_Student_Name11;
-    private javax.swing.JTextField Admin_Student_Name12;
-    private javax.swing.JTextField Admin_Student_Name13;
     private javax.swing.JTextField Admin_Student_Name2;
     private javax.swing.JTextField Admin_Student_Name3;
     private javax.swing.JTextField Admin_Student_Name4;
-    private javax.swing.JTextField Admin_Student_Name5;
     private javax.swing.JTextField Admin_Student_Name7;
+    private javax.swing.JTextField Admin_Update_Id;
+    private javax.swing.JTextField Admin_Update_Location;
+    private javax.swing.JTextField Admin_Update_Name;
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JLabel Delete_Student_Label;
+    private javax.swing.JLabel UpdateStatus;
+    private javax.swing.JButton Update_Button;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1207,23 +1259,14 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
