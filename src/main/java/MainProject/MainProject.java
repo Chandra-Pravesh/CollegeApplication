@@ -4,6 +4,12 @@
  */
 package MainProject;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author chand
@@ -11,11 +17,19 @@ package MainProject;
 public class MainProject extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainProject.class.getName());
+    private Connection con; 
 
     /**
      * Creates new form MainProject
      */
     public MainProject() {
+        try{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        con= DriverManager.getConnection("jdbc:mysql://localhost:3306/vit_vellore", "root", "root");
+        }
+        catch(ClassNotFoundException | SQLException ex){
+            System.out.println(ex);
+        }
         initComponents();
     }
 
@@ -318,6 +332,26 @@ public class MainProject extends javax.swing.JFrame {
 
     private void Admin_SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_SubmitActionPerformed
         // TODO add your handling code here:
+        String Id = Admin_Id.getText();
+        String Pass = Admin_Password.getText();
+        try{
+              PreparedStatement pmt = con.prepareStatement("SELECT * FROM Admin_Table WHERE UserID =? AND Password = ?");
+              pmt.setString(1, Id);
+              pmt.setString(2, Pass);
+              ResultSet res = pmt.executeQuery();
+              if (res.next()){
+                  System.out.println("Admin Vertified.");
+              }
+              else{
+                  System.out.println("Admin Not Varified");
+              }
+        }
+        catch(SQLException ex){
+            System.out.println(ex);
+        }
+      
+        
+        
     }//GEN-LAST:event_Admin_SubmitActionPerformed
 
     private void Faculty_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Faculty_PasswordActionPerformed
@@ -330,6 +364,25 @@ public class MainProject extends javax.swing.JFrame {
 
     private void Faculity_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Faculity_submitActionPerformed
         // TODO add your handling code here:
+            String Id = Faculty_Id.getText();
+        String Pass = Faculty_Password.getText();
+        try{
+              PreparedStatement pmt = con.prepareStatement("SELECT * FROM Faculty_Table WHERE UserID =? AND Password = ?");
+              pmt.setString(1, Id);
+              pmt.setString(2, Pass);
+              ResultSet res = pmt.executeQuery();
+              if (res.next()){
+                  System.out.println("Faculty Vertified.");
+              }
+              else{
+                  System.out.println("Faculty Not Varified");
+              }
+        }
+        catch(SQLException ex){
+            System.out.println(ex);
+        }
+      
+        
     }//GEN-LAST:event_Faculity_submitActionPerformed
 
     private void Admin_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Admin_ResetActionPerformed
